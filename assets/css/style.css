@@ -1,15 +1,59 @@
 .header-display {
-  background-color: grey;
   display: flex;
   justify-content: center;
   align-items: center;
-  color: white;
+  color: #827717;
+   -webkit-text-stroke-color: black;
+  -webkit-text-stroke-width: 2px;
 }
 .title {
   font-family: 'Carter One', cursive;
+ 
 }
 
 .dice {
   margin-right: 20px;
   font-size: 7em;
+}
+
+.login {
+  display: flex;
+  justify-content: center;
+  font-family: 'Heebo', sans-serif;
+  font-size: 1.5em
+}
+
+.welcome {
+  margin-left: 8px;
+  font-weight: bold;
+  text-align: center;
+}
+
+.welcome-img {
+  width: 40%;
+  height: auto;
+}
+
+img {
+  display: block;
+  margin: auto;
+  margin-bottom: 20px;
+}
+
+/* Found this trick below on Stack Overflow */
+
+/* label focus color */
+    .input-field input[type=text]:focus + label, .materialize-textarea:focus:not([readonly]) + label {
+     color: #827717 !important;
+    }
+
+/* label underline focus color */
+    .input-field input[type=text]:focus, .materialize-textarea:focus:not([readonly]) {
+     border-bottom: 1px solid #827717 !important;
+     box-shadow: 0 1px 0 0 #827717 !important;
+    }
+    
+.btn-small {
+  background-color: #827717 !important;
+  float: right;
 }
