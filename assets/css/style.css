@@ -1,0 +1,15 @@
+.header-display {
+  background-color: grey;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: white;
+}
+.title {
+  font-family: 'Carter One', cursive;
+}
+
+.dice {
+  margin-right: 20px;
+  font-size: 7em;
+}
