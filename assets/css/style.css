@@ -13,10 +13,10 @@
 
 .dice {
   margin-right: 20px;
-  font-size: 7em;
+  font-size: 5em;
 }
 
-.login {
+.main-content {
   display: flex;
   justify-content: center;
   font-family: 'Heebo', sans-serif;
@@ -56,4 +56,12 @@ img {
 .btn-small {
   background-color: #827717 !important;
   float: right;
+}
+
+.nav-wrapper {
+  background-color: #827717;
+}
+
+.logo {
+  font-size: 1.8em;
 }
