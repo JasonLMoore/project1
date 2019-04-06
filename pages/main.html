@@ -23,25 +23,36 @@
 
 <body>
 
-
+<div id="spell-adder" class="modal">
+    <div class="modal-content">
+      <div class="input-field col s12">
+          <textarea id="textarea1" class="materialize-textarea"></textarea>
+          <label for="textarea1">Enter Spell Here</label>
+        </div>
+    </div>
+    <div class="modal-footer">
+      <a href="#!" class="modal-close waves-effect waves-green btn-flat" id="add-spell">Add Spell</a>
+    </div>
+  </div>
+          
   <nav>
     <div class="nav-wrapper">
       <a href="#!" class="brand-logo center"><span><i class="fas fa-dice-d20 fa-fw logo"></i></span></a>
       <a href="#" data-target="mobile-demo" class="sidenav-trigger"><i class="material-icons">menu</i></a>
       <ul class="right hide-on-med-and-down">
-        <li><a href="#">Sort</a></li>
-        <li><a href="#">Filter</a></li>
-        <li><a href="#">Add New Spell</a></li>
-        <li><a href="#">Logout</a></li>
+        <li><a href="#" id="sort">Sort</a></li>
+        <li><a href="#" id="filter">Filter</a></li>
+        <li><a href="#spell-adder" class="modal-trigger" id="new-spell">Add New Spell</a></li>
+        <li><a href="#" id="logout">Logout</a></li>
       </ul>
     </div>
   </nav>
 
   <ul class="sidenav" id="mobile-demo">
-    <li><a href="#">Sort</a></li>
-    <li><a href="#">Filter</a></li>
-    <li><a href="#">Add New Spell</a></li>
-    <li><a href="#">Logout</a></li>
+    <li><a href="#" id="sort">Sort</a></li>
+    <li><a href="#" id="filter">Filter</a></li>
+    <li><a href="#spell-adder" class="modal-trigger" id="new-spell">Add New Spell</a></li>
+    <li><a href="#" id="logout">Logout</a></li>
   </ul>
 
   <div class="carousel carousel-slider center">
@@ -84,18 +95,7 @@
     </div>
   </div> -->
   <script>
-    var elem = document.querySelector('#modal1');
-    $(".btn-small").on('click', function () {
-      var username = $("#username").val().trim();
-      var password = $("#password").val().trim();
-      if (username === "" || password === "") {
-        var instance = M.Modal.init(elem);
-        instance.open();
-      } else {
-        $(".container").empty();
-        // Load Spinner
-      }
-    })
+    
 
     $('.carousel.carousel-slider').carousel({
       fullWidth: true,
@@ -105,6 +105,11 @@
     $(document).ready(function () {
       $('.sidenav').sidenav();
     });
+
+    $(document).ready(function(){
+    $('#spell-adder').modal();
+  });
+          
   </script>
 
 
