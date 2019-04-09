@@ -16,6 +16,14 @@
   width: 75%;
 }
 
+.carousel {
+  height: 600px !important;
+}
+
+.spell-card {
+  padding: 30px;
+}
+
 .dice {
   margin-right: 20px;
   font-size: 5em;
