@@ -14,7 +14,8 @@
   <!--jQuery-->
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
   <!-- FireBase -->
-  <script src="https://www.gstatic.com/firebasejs/5.9.3/firebase.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/5.9.3/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/5.9.3/firebase-auth.js"></script>
   <!--Let browser know website is optimized for mobile-->
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
@@ -27,19 +28,30 @@
   <div id="modal1" class="modal">
     <div class="modal-content">
       <h4>Attention!</h4>
-      <p>You must enter both a username and password to continue!</p>
+      <p>You must enter both a username and password to continue.</p>
     </div>
     <div class="modal-footer">
       <a href="#!" class="modal-close waves-effect waves-green btn-flat">Okay</a>
     </div>
   </div>
 
+  <div id="modal2" class="modal">
+    <div class="modal-content">
+      <h4>Attention!</h4>
+      <p>This account does not exist. Create an account using this information?</p>
+    </div>
+    <div class="modal-footer">
+      <a href="#!" class="modal-close waves-effect waves-green btn-flat">No</a>
+      <a href="#!" class="modal-close waves-effect waves-green btn-flat" id="create-login">Yes</a>
+    </div>
+  </div>
+
   <div class="header-display">
-    <i class="fas fa-dice-d20 dice"></i>
+   <span><i class="fas fa-dice-d20 dice"></i></span>
     <h1 class="title">D&D Spells</h1>
   </div>
   <div class="container">
-    <div class="row login">
+    <div class="row main-content">
       <div class="col 12">
         <div class="card">
           <div class="row">
@@ -50,7 +62,6 @@
                     <div class="img">
                       <img class="welcome-img" src="./assets/images/imgplaceholder.png" alt="" class="src">
                     </div>
-
                     <div class="row">
                       <div class="input-field col s12">
                         <textarea id="username" class="materialize-textarea"></textarea>
@@ -71,20 +82,7 @@
       </div>
     </div>
   </div>
-  <script>
-    var elem = document.querySelector('#modal1');
-    $(".btn-small").on('click', function () {
-      var username = $("#username").val().trim();
-      var password = $("#password").val().trim();
-      if (username === "" || password === "") {
-        var instance = M.Modal.init(elem);
-        instance.open();
-      } else {
-        $(".container").empty(); 
-        // Load Spinner
-      }
-    })
-  </script>
+<script src="./assets/javascript/login.js"></script>
 
 
   <!--JavaScript at end of body for optimized loading-->
