@@ -36,6 +36,12 @@
   font-size: 5em;
 }
 
+.results {
+  display: flex;
+  justify-content: center;
+  font-size: 30px;
+}
+
 .main-content {
   display: flex;
   justify-content: center;
@@ -58,6 +64,11 @@ img {
   display: block;
   margin: auto;
   margin-bottom: 20px;
+}
+
+.d20 {
+  width: 10em;
+  height: auto;
 }
 
 /* Found this trick below on Stack Overflow */
