@@ -27,13 +27,13 @@ $(document).ready(function () {
       var result = droll.roll(userInput);
       var resultDiv = $('<div>');
       $('.results').html(resultDiv);
-      resultDiv.text(result.total);
+      resultDiv.text(result);
       $('#user-input').val("");
       console.log(result);
  });
 
- $('#roll-dice').on('click', function () {
-    $('.results').val("")
+ $('.roll').on('click', function () {
+    $('.results').empty();
  });
 
 $("#logout").on("click", function () {
