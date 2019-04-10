@@ -47,15 +47,4 @@
         });
       });
 
-      $('.carousel.carousel-slider').carousel({
-        fullWidth: true,
-        indicators: true
-      });
-
-      $('').ready(function () {
-        $('.sidenav').sidenav();
-      });
-
-      $(document).ready(function () {
-        $('#spell-adder').modal();
-      });
+            
