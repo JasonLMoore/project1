@@ -34,8 +34,7 @@ $(document).ready(function () {
 
  $('#roll-dice').on('click', function () {
     $('.results').val("")
- })
-});
+ });
 
 $("#logout").on("click", function () {
   firebase.auth().signOut();
