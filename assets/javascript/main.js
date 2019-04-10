@@ -15,35 +15,54 @@ $('.carousel.carousel-slider').carousel({
 
 $(document).ready(function () {
   $('.sidenav').sidenav();
-});
-
-$(document).ready(function () {
   $('#spell-adder').modal();
   $('#dice-roller').modal();
 });
 
- $('#roll').on('click', function () {
-      var userInput = $('#user-input').val();
-      var result = droll.roll(userInput);
-      var resultDiv = $('<div>');
-      $('.results').html(resultDiv);
-      resultDiv.text(result);
-      $('#user-input').val("");
-      console.log(result);
- });
+$('#roll').on('click', function () {
+  animateDice();
+});
 
- $('.roll').on('click', function () {
-    $('.results').empty();
- });
+function animateDice() {
+  var userInput = $('#user-input').val();
+  if ( userInput !== "") {
+    $('.d20').animate({
+      borderSpacing: 360
+    }, {
+      step: function (now, fx) {
+        $(this).css('-webkit-transform', 'rotate(' + now + 'deg)');
+        $(this).css('-moz-transform', 'rotate(' + now + 'deg)');
+        $(this).css('transform', 'rotate(' + now + 'deg)');
+      },
+      duration: 2000,
+      complete: diceRoll,
+    }, 'linear');
+  }
+}
+
+function diceRoll() {
+  $('.d20').removeAttr('style');
+  var userInput = $('#user-input').val();
+  if (userInput !== "") {
+    var result = droll.roll(userInput);
+    var resultDiv = $('<div>');
+    $('.results').html(resultDiv);
+    resultDiv.text(result);
+    $('#user-input').val("");
+  }
+}
+
+$('.roll').on('click', function () {
+  $('.results').empty();
+});
 
 $("#logout").on("click", function () {
   firebase.auth().signOut();
   // sessionStorage.setItem("sessionID", null);
 });
 
-firebase.auth().onAuthStateChanged(function(user) {
-  if (user) {
-  } else {
+firebase.auth().onAuthStateChanged(function (user) {
+  if (user) {} else {
     window.location.href = "../index.html";
   }
 });
