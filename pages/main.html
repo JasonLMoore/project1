@@ -15,6 +15,9 @@
   <!-- Compiled and minified JavaScript -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
   <script src="../assets/javascript/run.js"></script>
+  <!-- Firebase -->
+  <script src="https://www.gstatic.com/firebasejs/5.9.3/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/5.9.3/firebase-auth.js"></script>
   <!--Let browser know website is optimized for mobile-->
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
@@ -55,18 +58,20 @@
       <ul class="right hide-on-med-and-down">
         <li><a href="#" id="sort">Sort</a></li>
         <li><a href="#" id="filter">Filter</a></li>
-        <li><a href="#spell-adder" class="modal-trigger spell">Add New Spell</a></li>
-        <li><a href="#dice-roller" class="modal-trigger roll">Dice Roller</a></li>
         <li><a href="../index.html" id="logout">Logout</a></li>
+        <li><a href="#spell-adder" class="modal-trigger" id="new-spell">Add New Spell</a></li>
+        <li><a href="#dice-roller" class="modal-trigger roll">Dice Roller</a></li>
+        <li><a href="#" id="logout">Logout</a></li>
       </ul>
     </div>
   </nav>
   <ul class="sidenav" id="mobile-demo">
     <li><a href="#" id="sort">Sort</a></li>
     <li><a href="#" id="filter">Filter</a></li>
-    <li><a href="#spell-adder" class="modal-trigger spell">Add New Spell</a></li>
+    <li><a href="../index.html" id="logout">Logout</a></li>
+    <li><a href="#spell-adder" class="modal-trigger" id="new-spell">Add New Spell</a></li>
     <li><a href="#dice-roller" class="modal-trigger roll">Dice Roller</a></li>
-    <li><a href="../index.html" id="logout">Logout</a></li>  
+    <li><a href="#" id="logout">Logout</a></li>
   </ul>
 
   <div class="container">
