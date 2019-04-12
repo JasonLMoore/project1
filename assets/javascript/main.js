@@ -8,11 +8,11 @@ var config = {
 };
 firebase.initializeApp(config);
 var database = firebase.database();
-var auth = firebase.auth();
 
-var searchWord = $("#new-spell").val().trim();
+
 var proxyURL = "https://cors-anywhere.herokuapp.com/";
 var baseURL = proxyURL + "http://dnd5eapi.co/api/spells/?name=";
+var spellArray = [];
 
 $('.carousel.carousel-slider').carousel({
   fullWidth: true,
@@ -27,52 +27,73 @@ $(document).ready(function () {
   $('#spell-adder').modal();
 });
 
-$("#logout").on("click", function () {
-  auth.signOut();
-});
-
-var userID = auth.currentUser.uid;
-var spellArray = database.ref("user/" + userID).once("array");
-
-auth.onAuthStateChanged(function(user) {
+firebase.auth().onAuthStateChanged(function (user) {
   if (user) {
+    console.log("user: ", user);
+    var userID = user.uid;
+    console.log("ID: " + userID);
+    var spellList = database.ref("user/" + userID + "/spells");
+    console.log("spelllist: ", spellList);
+
+    spellList.once('value').then(function(snapshot) {
+      snapshot.forEach(function (child) {
+        spellArray.push(child.val());
+      });
+      
+    });
+    console.log("sarray:" + spellArray);
+    
+    $("#logout").on("click", function () {
+      if (spellArray != null) {
+        spellList.setValue(null);
+        spellArray.forEach(function (entry) {
+          var newSpell = spellList.push();
+          newSpell.set({ entry });
+        });
+      }
+      firebase.auth().signOut();
+    });
+    if (spellArray.length != 0)  {
+    spellArray.forEach(createCard);}
+
   } else {
-    database.ref("user/" + userID).set({"array": spellArray});
     window.location.href = "../index.html";
   }
 });
 
-spellArray.forEach(function(entry) {
-  searchWord = entry;
-  var queryURL = baseURL + searchWord;
+
+function createCard(entry) {
+  
+  var queryURL = baseURL + entry;
   $.ajax({
     url: queryURL,
     method: "GET"
-  }).then(function(response) {
-    console.log(response)
-    console.log(response.results[0].url)
+  }).then(function (response) {
+    console.log("response: ", response)
+    console.log("response.results: " + response.results[0].url)
+
     $.ajax({
-        url: response.results[0].url,
-        method: "GET"
-    }).then(function(response) {
-      console.log(response)
-        
+      url: response.results[0].url,
+      method: "GET"
+    }).then(function (response) {
+      console.log("response2:" + response)
+
       var name = $("<div>").attr("id", "name").html("<h1>" + response.name + "</h1>");
 
       var level = $("<div>").attr("id", "level").text("Spell Level: " + response.level);
       if (response.level < 1) {
-        $("id", "level").text("Spell Level: Cantrip");
+        level.text("Spell Level: Cantrip");
       }
 
       var school = $("<div>").attr("id", "school").text("School of Magic: " + response.school.name);
       var con = $("<div>").attr("id", "con")
       if (response.concentration === "yes") {
-        $("id", "con").text("Concentration")
+        school.text("Concentration")
       }
-            
+
       var ritual = $("<div>").attr("id", "ritual")
       if (response.ritual === "yes") {
-        $("id", "ritual").text("Ritual");
+        ritual.text("Ritual");
       }
 
       var castTime = $("<div>").attr("id", "castingTime").text("Casting Time: " + response.casting_time);
@@ -83,41 +104,41 @@ spellArray.forEach(function(entry) {
 
       var material = $("<div>").attr("id", "material")
       if (response.material === undefined) {
-        $("#material").hide()
+        material.hide()
       } else {
-        response.material = response.material.split('â€™').join('\''); 
-        $("id", "material").text("Materials: " + response.material);
+        response.material = response.material.split('â€™').join('\'');
+        material.text("Materials: " + response.material);
       }
-        
+
       var duration = $("<div>").attr("id", "duration").text("Duration: " + response.duration);
 
       var desc = $("<div>").attr("id", "descript").text("Description: ");
-      for (n = 0; n < response.desc.length; n++){
+      for (n = 0; n < response.desc.length; n++) {
         response.desc[n] = response.desc[n].split('â€™').join('\'');
-        $("id", "descript").append(response.desc[n] + " ");
+        desc.append(response.desc[n] + " ");
       }
 
-        
+
       var highLvl = $("<div>").attr("id", "atHigherLevel").text("At Higher Levels: " + response.higher_level);
       if (response.higher_level === undefined) {
-        $("id", "atHigherLevel").hide();
+        highLvl.hide();
       }
 
-      var usedBy = $("<div>").attr("id", "usedBy").text("Can be cast by: ")  
-      for(var i = 0; i < response.classes.length; i++) {
-        $("id", "usedBy").append(response.classes[i].name);
+      var usedBy = $("<div>").attr("id", "usedBy").text("Can be cast by: ")
+      for (var i = 0; i < response.classes.length; i++) {
+        usedBy.append(response.classes[i].name);
         if (i < response.classes.length - 1) {
-          $("id", "usedBy").append(", ");
+          usedBy.append(", ");
         }
       }
-      
+
       var cardID = 1
-      
+
       var spellCard = $("<div>").attr("class", "carousel-item grey white-text spell-card");
-      
-      $(spellCard).attr("id", "spell-ID" + cardID);
-      $(spellCard).attr("href", "card" + cardID);
-      $(spellCard).append(
+
+      spellCard.attr("id", "spell-ID" + cardID);
+      spellCard.attr("href", "card" + cardID);
+      spellCard.append(
         name,
         level,
         school,
@@ -132,11 +153,10 @@ spellArray.forEach(function(entry) {
         highLvl,
         usedBy
       );
-      $("id", "carousel-slider").append(spellCard);
+      $("#carousel-slider").append(spellCard);
       cardID++
-      
-
     });
   });
-});
+}
 
+$("#add-spell").on("click", createCard($("#new-spell").val().trim()))
