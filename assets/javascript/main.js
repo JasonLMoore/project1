@@ -21,11 +21,47 @@ $('.carousel.carousel-slider').carousel({
 
 $(document).ready(function () {
   $('.sidenav').sidenav();
+  $('#spell-adder').modal();
+  $('#dice-roller').modal();
 });
 
-$(document).ready(function () {
-  $('#spell-adder').modal();
+$('#roll').on('click', function () {
+  animateDice();
 });
+
+function animateDice() {
+  var userInput = $('#user-input').val();
+  if ( userInput !== "") {
+    $('.d20').animate({
+      borderSpacing: 360
+    }, {
+      step: function (now, fx) {
+        $(this).css('-webkit-transform', 'rotate(' + now + 'deg)');
+        $(this).css('-moz-transform', 'rotate(' + now + 'deg)');
+        $(this).css('transform', 'rotate(' + now + 'deg)');
+      },
+      duration: 2000,
+      complete: diceRoll,
+    }, 'linear');
+  }
+}
+
+function diceRoll() {
+  $('.d20').removeAttr('style');
+  var userInput = $('#user-input').val();
+  if (userInput !== "") {
+    var result = droll.roll(userInput);
+    var resultDiv = $('<div>');
+    $('.results').html(resultDiv);
+    resultDiv.text(result);
+    $('#user-input').val("");
+  }
+}
+
+$('.roll').on('click', function () {
+  $('.results').empty();
+});
+
 
 firebase.auth().onAuthStateChanged(function (user) {
   if (user) {
@@ -57,6 +93,7 @@ firebase.auth().onAuthStateChanged(function (user) {
     spellArray.forEach(createCard);}
 
   } else {
+
     window.location.href = "../index.html";
   }
 });
