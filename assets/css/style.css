@@ -11,12 +11,38 @@
  
 }
 
-.dice {
-  margin-right: 20px;
-  font-size: 7em;
+.container {
+  margin-top: 20px !important;
+  width: 75%;
 }
 
-.login {
+.carousel {
+  height: 600px !important;
+}
+
+.spell-card {
+  margin: 0px !important;
+  padding: 30px;
+}
+
+.spell-card h1 {
+ padding: 0 !important;
+ margin-top: 0 !important;
+ margin-bottom: 20px !important;
+}
+
+.dice {
+  margin-right: 20px;
+  font-size: 5em;
+}
+
+.results {
+  display: flex;
+  justify-content: center;
+  font-size: 30px;
+}
+
+.main-content {
   display: flex;
   justify-content: center;
   font-family: 'Heebo', sans-serif;
@@ -40,6 +66,11 @@ img {
   margin-bottom: 20px;
 }
 
+.d20 {
+  width: 10em;
+  height: auto;
+}
+
 /* Found this trick below on Stack Overflow */
 
 /* label focus color */
@@ -56,4 +87,12 @@ img {
 .btn-small {
   background-color: #827717 !important;
   float: right;
+}
+
+.nav-wrapper {
+  background-color: #827717;
+}
+
+.logo {
+  font-size: 1.8em;
 }
