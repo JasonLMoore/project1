@@ -38,6 +38,7 @@ $(".btn-small").on('click', function () {
 });
 
 $("#create-login").on('click', function () {
+  
   var username = $("#username").val().trim();
   var password = $("#password").val().trim();
 
