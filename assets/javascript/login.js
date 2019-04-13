@@ -17,6 +17,12 @@ firebase.auth().onAuthStateChanged(function(user) {
   }
 });
 
+$(".login-form").keyup(function(e) {
+  if(e.which === 13){
+    $(".btn-small").click();
+  }
+})
+
 $(".btn-small").on('click', function () {
   var username = $("#username").val().trim();
   var password = $("#password").val().trim();
@@ -36,6 +42,7 @@ $(".btn-small").on('click', function () {
     });
   }
 });
+
 
 $("#create-login").on('click', function () {
   
